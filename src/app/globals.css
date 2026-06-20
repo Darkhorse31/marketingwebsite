@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@theme {
+  --color-rose-soft: #fdf2f8;
+  --color-rose-primary: #fbcfe8;
+  --color-lavender-soft: #f5f3ff;
+  --color-lavender-primary: #ddd6fe;
+  --color-fresh-soft: #f0fdf4;
+  --color-fresh-primary: #bbf7d0;
+  --color-luxury-bg: #111111;
+  --color-luxury-gold: #d4af37;
+  --color-vitamin-soft: #fffbeb;
+  --color-vitamin-primary: #fde68a;
+  
+  --font-serif: var(--font-playfair), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  :root {
+    --bg-color: var(--color-rose-soft);
+    --text-color: #1a1a1a;
+    --accent-color: var(--color-rose-primary);
+  }
+
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-sans);
+    transition: background-color 1s ease-in-out, color 1s ease-in-out;
+    overflow-x: hidden;
+    @apply antialiased selection:bg-rose-200 selection:text-black;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+  }
+}
+
+@layer utilities {
+  .theme-transition {
+    transition: background-color 1s ease-in-out, color 1s ease-in-out;
+  }
+  
+  .glass-panel {
+    @apply bg-white/10 backdrop-blur-md border border-white/20 shadow-xl;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.4);
+}
