@@ -11,10 +11,22 @@ import BrandStory from "@/components/layout/BrandStory";
 import Awards from "@/components/layout/Awards";
 import FinalCollection from "@/components/products/FinalCollection";
 import NewsletterFooter from "@/components/layout/NewsletterFooter";
+import DropletCanvas from "@/components/3d/DropletCanvas";
+import ScrollPath from "@/components/3d/ScrollPath";
+import DropletController from "@/components/3d/DropletController";
+
+import GlassFilters from "@/components/ui/GlassFilters";
 
 export default function Home() {
   return (
     <main className="relative w-full">
+      <GlassFilters />
+      {/* 3D Global Elements */}
+      <DropletCanvas />
+      <ScrollPath />
+      <DropletController />
+
+      {/* Narrative Scenes */}
       <OpeningHero />
       <BrandPhilosophy />
       <SignatureCollection />

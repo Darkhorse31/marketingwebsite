@@ -1,8 +1,9 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { GlassCard } from "@/components/ui/GlassComponents";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,7 +12,7 @@ export default function SignatureCollection() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const productsRef = useRef<HTMLDivElement>(null);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!container.current) return;
 
     const ctx = gsap.context(() => {
@@ -80,13 +81,13 @@ export default function SignatureCollection() {
       <div ref={productsRef} className="flex w-[300vw] h-[60vh] items-center relative z-20 mt-20">
         {/* Product 1 */}
         <div className="product-card w-screen flex items-center justify-center px-10 md:px-32 h-full gap-10">
-          <div className="w-1/2 h-[80%] glass-panel rounded-t-full relative overflow-hidden group">
+          <GlassCard borderRadius="50% 50% 0 0" className="w-1/2 h-[80%] relative overflow-hidden group p-0 flex items-center justify-center">
              {/* Placeholder for Product Image */}
              <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-700"></div>
              <div className="w-full h-full flex items-center justify-center">
                <span className="font-serif text-3xl opacity-50">L&apos;Orchid Serum</span>
              </div>
-          </div>
+          </GlassCard>
           <div className="w-1/2 flex flex-col gap-6">
             <span className="text-sm uppercase tracking-widest text-gray-500">01 / The Elixir</span>
             <h3 className="font-serif text-5xl">Midnight Orchid</h3>
@@ -98,12 +99,12 @@ export default function SignatureCollection() {
 
         {/* Product 2 */}
         <div className="product-card w-screen flex items-center justify-center px-10 md:px-32 h-full gap-10">
-          <div className="w-1/2 h-[80%] glass-panel rounded-b-full relative overflow-hidden group">
+          <GlassCard borderRadius="0 0 50% 50%" className="w-1/2 h-[80%] relative overflow-hidden group p-0 flex items-center justify-center">
              <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-700"></div>
              <div className="w-full h-full flex items-center justify-center">
                <span className="font-serif text-3xl opacity-50">Lavender Mist</span>
              </div>
-          </div>
+          </GlassCard>
           <div className="w-1/2 flex flex-col gap-6">
             <span className="text-sm uppercase tracking-widest text-gray-500">02 / The Essence</span>
             <h3 className="font-serif text-5xl">Provencal Mist</h3>
@@ -115,12 +116,12 @@ export default function SignatureCollection() {
 
         {/* Product 3 */}
         <div className="product-card w-screen flex items-center justify-center px-10 md:px-32 h-full gap-10">
-          <div className="w-1/2 h-[80%] glass-panel rounded-[100px] relative overflow-hidden group">
+          <GlassCard borderRadius="100px" className="w-1/2 h-[80%] relative overflow-hidden group p-0 flex items-center justify-center">
              <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-700"></div>
              <div className="w-full h-full flex items-center justify-center">
                <span className="font-serif text-3xl opacity-50">Pearl Cream</span>
              </div>
-          </div>
+          </GlassCard>
           <div className="w-1/2 flex flex-col gap-6">
             <span className="text-sm uppercase tracking-widest text-gray-500">03 / The Seal</span>
             <h3 className="font-serif text-5xl">Crushed Pearl</h3>

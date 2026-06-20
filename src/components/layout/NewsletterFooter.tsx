@@ -1,8 +1,9 @@
 "use client";
 
-import { useLayoutEffect, useRef, useEffect } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { GlassCard, GlassPanel, GlassButton } from "@/components/ui/GlassComponents";
 import { ArrowRight } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -35,7 +36,7 @@ export default function NewsletterFooter() {
   const container = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!container.current) return;
 
     const ctx = gsap.context(() => {
@@ -78,9 +79,9 @@ export default function NewsletterFooter() {
               placeholder="Your email address"
               className="w-full bg-transparent border-b border-white/20 pb-4 text-center text-xl font-light focus:outline-none focus:border-white transition-colors"
             />
-            <button type="button" className="absolute right-0 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
+            <GlassButton type="button" className="absolute right-0 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 px-4 py-2 bg-transparent">
               <ArrowRight className="w-6 h-6" />
-            </button>
+            </GlassButton>
           </form>
         </div>
 

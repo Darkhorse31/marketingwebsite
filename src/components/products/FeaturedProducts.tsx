@@ -1,15 +1,16 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { GlassCard } from "@/components/ui/GlassComponents";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function FeaturedProducts() {
   const container = useRef<HTMLDivElement>(null);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!container.current) return;
 
     const ctx = gsap.context(() => {
@@ -51,7 +52,7 @@ export default function FeaturedProducts() {
             { title: "Cellular Eye Contour", price: "$180", type: "Targeted Repair" },
             { title: "Botanical Cleansing Silk", price: "$95", type: "Purification" }
           ].map((item, i) => (
-            <div key={i} className="featured-card group cursor-pointer">
+            <GlassCard key={i} className="featured-card group cursor-pointer p-6">
               <div className="relative w-full aspect-[3/4] mb-8 overflow-hidden bg-white/5 rounded-sm">
                 {/* Subtle hover zoom on image placeholder container */}
                 <div className="absolute inset-0 transition-transform duration-1000 group-hover:scale-105 bg-gradient-to-t from-black/80 to-transparent flex items-end p-8">
@@ -64,7 +65,7 @@ export default function FeaturedProducts() {
                 <h3 className="font-serif text-2xl mb-2 group-hover:text-luxury-gold transition-colors">{item.title}</h3>
                 <span className="font-sans font-light opacity-60">{item.price}</span>
               </div>
-            </div>
+            </GlassCard>
           ))}
         </div>
       </div>

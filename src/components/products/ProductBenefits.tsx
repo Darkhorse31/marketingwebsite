@@ -1,8 +1,9 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { GlassCard } from "@/components/ui/GlassComponents";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,7 +11,7 @@ export default function ProductBenefits() {
   const container = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!container.current) return;
 
     const ctx = gsap.context(() => {
@@ -89,13 +90,13 @@ export default function ProductBenefits() {
           { title: "Elasticity", desc: "Restores the skin's architectural bounce and firmness." },
           { title: "Clarity", desc: "Purifies pores and evens chromatic pigmentation." }
         ].map((benefit, i) => (
-          <div key={i} className="benefit-item flex flex-col items-center text-center p-8 glass-panel rounded-3xl">
+          <GlassCard key={i} className="benefit-item flex flex-col items-center text-center p-8">
             <div className="w-16 h-16 rounded-full border border-black/10 flex items-center justify-center mb-6">
               <span className="font-serif text-xl italic">{i + 1}</span>
             </div>
             <h3 className="font-serif text-3xl mb-4">{benefit.title}</h3>
             <p className="font-sans font-light text-gray-600">{benefit.desc}</p>
-          </div>
+          </GlassCard>
         ))}
       </div>
     </section>

@@ -1,8 +1,9 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { GlassPanel } from "@/components/ui/GlassComponents";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,7 +13,7 @@ export default function OpeningHero() {
   const textRef = useRef<HTMLDivElement>(null);
   const particlesRef = useRef<HTMLDivElement>(null);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!container.current) return;
 
     const ctx = gsap.context(() => {
@@ -102,9 +103,9 @@ export default function OpeningHero() {
       <div className="relative z-20 container mx-auto px-4 flex flex-col items-center justify-center h-full">
         <div ref={bottleRef} className="relative w-64 h-96 md:w-80 md:h-[30rem] mb-8 will-change-transform">
           {/* Using a placeholder for now, replace with actual luxury product image */}
-          <div className="absolute inset-0 rounded-full bg-white/20 backdrop-blur-md border border-white/40 shadow-2xl overflow-hidden flex items-center justify-center glass-panel">
+          <GlassPanel borderRadius="9999px" className="absolute inset-0 flex items-center justify-center">
             <span className="font-serif text-2xl text-black/50">L&apos;AURA</span>
-          </div>
+          </GlassPanel>
           {/* <Image src="/images/hero-bottle.png" alt="Aura Luxury Serum" fill className="object-contain drop-shadow-2xl" priority /> */}
         </div>
 

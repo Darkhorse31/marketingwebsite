@@ -1,8 +1,9 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { GlassCard, GlassPanel, GlassButton } from "@/components/ui/GlassComponents";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,7 +12,7 @@ export default function CustomerExperience() {
   const textRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!container.current) return;
 
     const ctx = gsap.context(() => {
@@ -58,7 +59,7 @@ export default function CustomerExperience() {
         </h2>
       </div>
 
-      <div ref={cardRef} className="relative z-10 glass-panel p-16 md:p-24 max-w-4xl mx-4 text-center rounded-[40px]">
+      <GlassCard ref={cardRef} className="relative z-10 p-16 md:p-24 max-w-4xl mx-4 text-center">
         <div className="w-12 h-12 mx-auto mb-8 text-rose-primary opacity-60">
           <svg viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
@@ -71,7 +72,7 @@ export default function CustomerExperience() {
           <span className="font-sans font-medium text-sm tracking-widest uppercase text-gray-900 mb-1">Eleanor V.</span>
           <span className="font-sans font-light text-xs text-gray-500">Global Editor, VOGUE</span>
         </div>
-      </div>
+      </GlassCard>
     </section>
   );
 }
