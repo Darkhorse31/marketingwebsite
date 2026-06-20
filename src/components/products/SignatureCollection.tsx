@@ -3,6 +3,7 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useDropletStore } from "@/store/useDropletStore";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,32 +11,19 @@ export default function SignatureCollection() {
   const container = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const productsRef = useRef<HTMLDivElement>(null);
+  const setActiveTheme = useDropletStore((state) => state.setActiveTheme);
 
   useLayoutEffect(() => {
     if (!container.current) return;
     
     const ctx = gsap.context(() => {
-      // Color Theme Morph Trigger (Rose to Lavender)
+      // Set Droplet Theme Trigger
       ScrollTrigger.create({
         trigger: container.current,
         start: "top center",
         end: "bottom center",
-        onEnter: () => {
-          gsap.to(document.documentElement, {
-            "--bg-color": "var(--color-lavender-soft)",
-            "--accent-color": "var(--color-lavender-primary)",
-            duration: 1.5,
-            ease: "power2.inOut"
-          });
-        },
-        onLeaveBack: () => {
-          gsap.to(document.documentElement, {
-            "--bg-color": "var(--color-rose-soft)",
-            "--accent-color": "var(--color-rose-primary)",
-            duration: 1.5,
-            ease: "power2.inOut"
-          });
-        }
+        onEnter: () => setActiveTheme('SignatureCollection'),
+        onEnterBack: () => setActiveTheme('SignatureCollection'),
       });
 
       // Horizontal Scroll for Products
@@ -67,7 +55,7 @@ export default function SignatureCollection() {
     }, container);
 
     return () => ctx.revert();
-  }, []);
+  }, [setActiveTheme]);
 
   return (
     <section ref={container} className="relative w-full h-screen overflow-hidden flex flex-col justify-center">

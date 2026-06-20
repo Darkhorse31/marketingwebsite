@@ -1,8 +1,9 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useDropletStore } from "@/store/useDropletStore";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -26,24 +27,19 @@ const PARTICLES = [
 
 export default function OpeningHero() {
   const container = useRef<HTMLDivElement>(null);
-  const bottleRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const particlesRef = useRef<HTMLDivElement>(null);
+  const setActiveTheme = useDropletStore((state) => state.setActiveTheme);
+
+  // Set initial theme for the droplet
+  useEffect(() => {
+    setActiveTheme("Hero");
+  }, [setActiveTheme]);
 
   useLayoutEffect(() => {
     if (!container.current) return;
     
     const ctx = gsap.context(() => {
-      // Floating animation for bottle
-      gsap.to(bottleRef.current, {
-        y: -20,
-        rotation: 1,
-        duration: 3,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut"
-      });
-
       // Ambient particle movement
       gsap.to(".particle", {
         y: "random(-50, 50)",
@@ -67,22 +63,15 @@ export default function OpeningHero() {
           start: "top top",
           end: "bottom top",
           scrub: 1.5,
+          onEnter: () => setActiveTheme("Hero"),
+          onEnterBack: () => setActiveTheme("Hero"),
         }
       });
 
-      tl.to(bottleRef.current, { y: 200, scale: 1.1, opacity: 0 }, 0)
-        .to(textRef.current, { y: -100, opacity: 0 }, 0)
+      tl.to(textRef.current, { y: -100, opacity: 0 }, 0)
         .to(particlesRef.current, { y: -150, opacity: 0 }, 0);
 
       // Intro animation
-      gsap.from(bottleRef.current, {
-        y: 100,
-        opacity: 0,
-        duration: 2,
-        ease: "power3.out",
-        delay: 0.2
-      });
-      
       gsap.from(".hero-text-line", {
         y: 50,
         opacity: 0,
@@ -95,7 +84,7 @@ export default function OpeningHero() {
     }, container);
 
     return () => ctx.revert();
-  }, []);
+  }, [setActiveTheme]);
 
   return (
     <section ref={container} className="relative w-full h-screen overflow-hidden flex items-center justify-center bg-rose-soft">
@@ -117,16 +106,13 @@ export default function OpeningHero() {
         ))}
       </div>
 
-      <div className="relative z-20 container mx-auto px-4 flex flex-col items-center justify-center h-full">
-        <div ref={bottleRef} className="relative w-64 h-96 md:w-80 md:h-[30rem] mb-8 will-change-transform">
-          {/* Using a placeholder for now, replace with actual luxury product image */}
-          <div className="absolute inset-0 rounded-full bg-white/20 backdrop-blur-md border border-white/40 shadow-2xl overflow-hidden flex items-center justify-center glass-panel">
-            <span className="font-serif text-2xl text-black/50">L&apos;AURA</span>
-          </div>
-          {/* <Image src="/images/hero-bottle.png" alt="Aura Luxury Serum" fill className="object-contain drop-shadow-2xl" priority /> */}
-        </div>
+      <div className="relative z-20 container mx-auto px-4 flex flex-col items-center justify-center h-full pointer-events-none">
+        {/* We have removed the L'AURA placeholder, the DropletCanvas will render in the background/foreground */}
 
-        <div ref={textRef} className="text-center z-30">
+        {/* Spacer for where the bottle used to be */}
+        <div className="relative w-64 h-96 md:w-80 md:h-[30rem] mb-8" />
+
+        <div ref={textRef} className="text-center z-30 pointer-events-auto">
           <h1 className="hero-text-line font-serif text-5xl md:text-8xl tracking-tighter text-gray-900 mb-4">
             Essence of <span className="italic font-light">Purity</span>
           </h1>

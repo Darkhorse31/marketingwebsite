@@ -4,6 +4,7 @@ import { useLayoutEffect, useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight } from "lucide-react";
+import { useDropletStore } from "@/store/useDropletStore";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -34,11 +35,21 @@ const CustomCursor = () => {
 export default function NewsletterFooter() {
   const container = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
+  const setActiveTheme = useDropletStore((state) => state.setActiveTheme);
 
   useLayoutEffect(() => {
     if (!container.current) return;
     
     const ctx = gsap.context(() => {
+      // Trigger Footer theme dissolve for droplet
+      ScrollTrigger.create({
+        trigger: container.current,
+        start: "top center",
+        end: "bottom bottom",
+        onEnter: () => setActiveTheme('Footer'),
+        onEnterBack: () => setActiveTheme('Footer')
+      });
+
       // Parallax Footer Reveal
       gsap.fromTo(".footer-content",
         { y: -100, opacity: 0 },
@@ -56,7 +67,7 @@ export default function NewsletterFooter() {
     }, container);
 
     return () => ctx.revert();
-  }, []);
+  }, [setActiveTheme]);
 
   return (
     <>

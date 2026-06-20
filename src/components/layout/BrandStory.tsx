@@ -3,17 +3,28 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useDropletStore } from "@/store/useDropletStore";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function BrandStory() {
   const container = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
+  const setActiveTheme = useDropletStore((state) => state.setActiveTheme);
 
   useLayoutEffect(() => {
     if (!container.current) return;
     
     const ctx = gsap.context(() => {
+      // Set Droplet Theme Trigger
+      ScrollTrigger.create({
+        trigger: container.current,
+        start: "top center",
+        end: "bottom center",
+        onEnter: () => setActiveTheme('BrandStory'),
+        onEnterBack: () => setActiveTheme('BrandStory'),
+      });
+
       // Parallax text
       gsap.fromTo(".story-text", 
         { y: 100, opacity: 0 },
@@ -45,7 +56,7 @@ export default function BrandStory() {
     }, container);
 
     return () => ctx.revert();
-  }, []);
+  }, [setActiveTheme]);
 
   return (
     <section ref={container} className="relative w-full py-32 flex flex-col items-center bg-white text-black overflow-hidden">

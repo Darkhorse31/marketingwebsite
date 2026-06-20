@@ -3,38 +3,26 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useDropletStore } from "@/store/useDropletStore";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function LifestyleGallery() {
   const container = useRef<HTMLDivElement>(null);
   const galleryRef = useRef<HTMLDivElement>(null);
+  const setActiveTheme = useDropletStore((state) => state.setActiveTheme);
 
   useLayoutEffect(() => {
     if (!container.current) return;
     
     const ctx = gsap.context(() => {
-      // Transition back to a softer theme for lifestyle
+      // Set Droplet Theme Trigger
       ScrollTrigger.create({
         trigger: container.current,
         start: "top center",
         end: "bottom center",
-        onEnter: () => {
-          gsap.to(document.documentElement, {
-            "--bg-color": "var(--color-rose-soft)",
-            "--text-color": "#1a1a1a",
-            duration: 1.5,
-            ease: "power2.inOut"
-          });
-        },
-        onLeaveBack: () => {
-          gsap.to(document.documentElement, {
-            "--bg-color": "var(--color-luxury-bg)",
-            "--text-color": "var(--color-vitamin-soft)",
-            duration: 1.5,
-            ease: "power2.inOut"
-          });
-        }
+        onEnter: () => setActiveTheme('LifestyleGallery'),
+        onEnterBack: () => setActiveTheme('LifestyleGallery'),
       });
 
       // Parallax scrolling for columns
@@ -55,7 +43,7 @@ export default function LifestyleGallery() {
     }, container);
 
     return () => ctx.revert();
-  }, []);
+  }, [setActiveTheme]);
 
   return (
     <section ref={container} className="relative w-full py-32 overflow-hidden bg-rose-soft">

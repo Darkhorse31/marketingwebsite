@@ -3,38 +3,26 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useDropletStore } from "@/store/useDropletStore";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function ProductBenefits() {
   const container = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
+  const setActiveTheme = useDropletStore((state) => state.setActiveTheme);
 
   useLayoutEffect(() => {
     if (!container.current) return;
     
     const ctx = gsap.context(() => {
-      // Color Theme Morph Trigger (Fresh to Vitamin)
+      // Set Droplet Theme Trigger
       ScrollTrigger.create({
         trigger: container.current,
         start: "top center",
         end: "bottom center",
-        onEnter: () => {
-          gsap.to(document.documentElement, {
-            "--bg-color": "var(--color-vitamin-soft)",
-            "--accent-color": "var(--color-vitamin-primary)",
-            duration: 1.5,
-            ease: "power2.inOut"
-          });
-        },
-        onLeaveBack: () => {
-          gsap.to(document.documentElement, {
-            "--bg-color": "var(--color-fresh-soft)",
-            "--accent-color": "var(--color-fresh-primary)",
-            duration: 1.5,
-            ease: "power2.inOut"
-          });
-        }
+        onEnter: () => setActiveTheme('ProductBenefits'),
+        onEnterBack: () => setActiveTheme('ProductBenefits'),
       });
 
       // Text Scale and Fade
@@ -72,7 +60,7 @@ export default function ProductBenefits() {
     }, container);
 
     return () => ctx.revert();
-  }, []);
+  }, [setActiveTheme]);
 
   return (
     <section ref={container} className="relative w-full min-h-screen flex flex-col items-center justify-center py-32 px-4">

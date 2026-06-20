@@ -3,42 +3,31 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useDropletStore, IngredientTheme } from "@/store/useDropletStore";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function IngredientStory() {
   const container = useRef<HTMLDivElement>(null);
   const leftCol = useRef<HTMLDivElement>(null);
-  const rightCol = useRef<HTMLDivElement>(null);
+
+  const setActiveTheme = useDropletStore(state => state.setActiveTheme);
+  const setIngredientTheme = useDropletStore(state => state.setIngredientTheme);
 
   useLayoutEffect(() => {
     if (!container.current) return;
     
     const ctx = gsap.context(() => {
-      // Color Theme Morph Trigger (Lavender to Fresh)
+      // Overall Section Trigger
       ScrollTrigger.create({
         trigger: container.current,
         start: "top center",
         end: "bottom center",
-        onEnter: () => {
-          gsap.to(document.documentElement, {
-            "--bg-color": "var(--color-fresh-soft)",
-            "--accent-color": "var(--color-fresh-primary)",
-            duration: 1.5,
-            ease: "power2.inOut"
-          });
-        },
-        onLeaveBack: () => {
-          gsap.to(document.documentElement, {
-            "--bg-color": "var(--color-lavender-soft)",
-            "--accent-color": "var(--color-lavender-primary)",
-            duration: 1.5,
-            ease: "power2.inOut"
-          });
-        }
+        onEnter: () => setActiveTheme('IngredientStory'),
+        onEnterBack: () => setActiveTheme('IngredientStory'),
       });
 
-      // Pin Left Column, Scroll Right Column
+      // Pin Left Column
       ScrollTrigger.create({
         trigger: container.current,
         start: "top top",
@@ -47,25 +36,40 @@ export default function IngredientStory() {
         pinSpacing: false
       });
 
-      // Image Parallax within Right Column
-      const images = gsap.utils.toArray('.ingredient-img');
-      images.forEach((img: any) => {
-        gsap.to(img, {
-          y: -100,
-          ease: "none",
-          scrollTrigger: {
-            trigger: img.parentElement,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true
-          }
+      // Map individual ingredients
+      const items = gsap.utils.toArray('.ingredient-item') as HTMLElement[];
+
+      items.forEach((item) => {
+        const theme = item.getAttribute('data-theme') as IngredientTheme;
+
+        ScrollTrigger.create({
+          trigger: item,
+          start: "top center",
+          end: "bottom center",
+          onEnter: () => setIngredientTheme(theme),
+          onEnterBack: () => setIngredientTheme(theme),
         });
+
+        // Parallax image
+        const img = item.querySelector('.ingredient-img');
+        if (img) {
+          gsap.to(img, {
+            y: -100,
+            ease: "none",
+            scrollTrigger: {
+              trigger: item,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true
+            }
+          });
+        }
       });
 
     }, container);
 
     return () => ctx.revert();
-  }, []);
+  }, [setActiveTheme, setIngredientTheme]);
 
   return (
     <section ref={container} className="relative w-full flex flex-col md:flex-row pb-[20vh]">
@@ -81,39 +85,56 @@ export default function IngredientStory() {
         </p>
       </div>
 
-      {/* Right Column - Scrolling Images */}
-      <div ref={rightCol} className="w-full md:w-1/2 flex flex-col gap-32 pt-[50vh] px-10 md:px-20 relative z-20">
+      {/* Right Column - Scrolling Narrative */}
+      <div className="w-full md:w-1/2 flex flex-col gap-[30vh] pt-[50vh] pb-[50vh] px-10 md:px-20 relative z-20">
         
-        {/* Ingredient 1 */}
-        <div className="relative w-full aspect-[3/4] glass-panel overflow-hidden group">
-          <div className="absolute inset-0 ingredient-img scale-[1.2] flex items-center justify-center bg-black/5">
-             <span className="font-serif text-2xl opacity-40">24k Gold Flakes</span>
+        <div className="ingredient-item relative w-full h-[60vh] glass-panel overflow-hidden group flex items-center justify-center" data-theme="Rose">
+          <div className="absolute inset-0 ingredient-img scale-[1.2] bg-rose-100 flex items-center justify-center">
+             <span className="font-serif text-2xl opacity-40 text-rose-800">Damascus Rose</span>
           </div>
-          <div className="absolute bottom-10 left-10 text-black">
-             <h4 className="font-serif text-3xl mb-2">Cellular Gold</h4>
-             <p className="font-sans text-sm font-light uppercase tracking-widest opacity-70">Anti-inflammatory</p>
+          <div className="absolute bottom-10 left-10 text-black z-10">
+             <h4 className="font-serif text-3xl mb-2">Damascus Rose</h4>
+             <p className="font-sans text-sm font-light uppercase tracking-widest opacity-70">Vitality & Bloom</p>
           </div>
         </div>
 
-        {/* Ingredient 2 */}
-        <div className="relative w-full aspect-square glass-panel overflow-hidden group ml-auto md:w-4/5">
-          <div className="absolute inset-0 ingredient-img scale-[1.2] flex items-center justify-center bg-black/5">
-             <span className="font-serif text-2xl opacity-40">Aloe Vera Heart</span>
+        <div className="ingredient-item relative w-full h-[60vh] glass-panel overflow-hidden group ml-auto md:w-4/5 flex items-center justify-center" data-theme="Lavender">
+          <div className="absolute inset-0 ingredient-img scale-[1.2] bg-purple-100 flex items-center justify-center">
+             <span className="font-serif text-2xl opacity-40 text-purple-800">French Lavender</span>
           </div>
-          <div className="absolute bottom-10 left-10 text-black">
+          <div className="absolute bottom-10 left-10 text-black z-10">
+             <h4 className="font-serif text-3xl mb-2">French Lavender</h4>
+             <p className="font-sans text-sm font-light uppercase tracking-widest opacity-70">Calm & Restore</p>
+          </div>
+        </div>
+
+        <div className="ingredient-item relative w-full h-[60vh] glass-panel overflow-hidden group flex items-center justify-center" data-theme="VitaminC">
+          <div className="absolute inset-0 ingredient-img scale-[1.2] bg-orange-100 flex items-center justify-center">
+             <span className="font-serif text-2xl opacity-40 text-orange-800">Vitamin C Core</span>
+          </div>
+          <div className="absolute bottom-10 left-10 text-black z-10">
+             <h4 className="font-serif text-3xl mb-2">Vitamin C Core</h4>
+             <p className="font-sans text-sm font-light uppercase tracking-widest opacity-70">Radiance & Glow</p>
+          </div>
+        </div>
+
+        <div className="ingredient-item relative w-full h-[60vh] glass-panel overflow-hidden group ml-auto md:w-4/5 flex items-center justify-center" data-theme="Aloe">
+          <div className="absolute inset-0 ingredient-img scale-[1.2] bg-green-100 flex items-center justify-center">
+             <span className="font-serif text-2xl opacity-40 text-green-800">Desert Aloe</span>
+          </div>
+          <div className="absolute bottom-10 left-10 text-black z-10">
              <h4 className="font-serif text-3xl mb-2">Desert Aloe</h4>
              <p className="font-sans text-sm font-light uppercase tracking-widest opacity-70">Deep Hydration</p>
           </div>
         </div>
 
-        {/* Ingredient 3 */}
-        <div className="relative w-full aspect-[4/3] glass-panel overflow-hidden group">
-          <div className="absolute inset-0 ingredient-img scale-[1.2] flex items-center justify-center bg-black/5">
-             <span className="font-serif text-2xl opacity-40">Wild Honey</span>
+        <div className="ingredient-item relative w-full h-[60vh] glass-panel overflow-hidden group flex items-center justify-center" data-theme="Gold">
+          <div className="absolute inset-0 ingredient-img scale-[1.2] bg-yellow-100 flex items-center justify-center">
+             <span className="font-serif text-2xl opacity-40 text-yellow-800">Cellular Gold</span>
           </div>
-          <div className="absolute bottom-10 left-10 text-black">
-             <h4 className="font-serif text-3xl mb-2">Manuka Nectar</h4>
-             <p className="font-sans text-sm font-light uppercase tracking-widest opacity-70">Cell Repair</p>
+          <div className="absolute bottom-10 left-10 text-black z-10">
+             <h4 className="font-serif text-3xl mb-2">Cellular Gold</h4>
+             <p className="font-sans text-sm font-light uppercase tracking-widest opacity-70">Anti-inflammatory</p>
           </div>
         </div>
 
