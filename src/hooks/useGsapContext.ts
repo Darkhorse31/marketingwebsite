@@ -17,6 +17,7 @@ export function useGsapContext(callback: (context: gsap.Context) => void, depend
     }, containerRef);
 
     return () => ctx.revert();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, dependencies);
 
   return containerRef;
