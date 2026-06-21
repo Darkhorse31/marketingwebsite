@@ -3,8 +3,15 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const IMAGES = [
+  "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=800&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?q=80&w=800&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1596245037286-4f47bc3adab2?q=80&w=800&auto=format&fit=crop"
+];
 
 export default function FeaturedProducts() {
   const container = useRef<HTMLDivElement>(null);
@@ -53,9 +60,15 @@ export default function FeaturedProducts() {
           ].map((item, i) => (
             <div key={i} className="featured-card group cursor-pointer">
               <div className="relative w-full aspect-[3/4] mb-8 overflow-hidden bg-white/5 rounded-sm">
-                {/* Subtle hover zoom on image placeholder container */}
-                <div className="absolute inset-0 transition-transform duration-1000 group-hover:scale-105 bg-gradient-to-t from-black/80 to-transparent flex items-end p-8">
-                  <div className="w-full h-[80%] absolute top-0 left-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.1)_0%,transparent_70%)]"></div>
+                <Image
+                  src={IMAGES[i]}
+                  alt={item.title}
+                  fill
+                  className="object-cover transition-transform duration-1000 group-hover:scale-105 opacity-80 mix-blend-screen"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-8">
+                  <div className="w-full h-[80%] absolute top-0 left-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.1)_0%,transparent_70%)] pointer-events-none"></div>
                   <span className="font-serif text-6xl text-white/10 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">0{i+1}</span>
                 </div>
               </div>

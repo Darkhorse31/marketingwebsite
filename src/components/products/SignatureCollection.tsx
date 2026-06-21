@@ -3,6 +3,7 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -79,15 +80,18 @@ export default function SignatureCollection() {
 
       <div ref={productsRef} className="flex w-[300vw] h-[60vh] items-center relative z-20 mt-20">
         {/* Product 1 */}
-        <div className="product-card w-screen flex items-center justify-center px-10 md:px-32 h-full gap-10">
-          <div className="w-1/2 h-[80%] glass-panel rounded-t-full relative overflow-hidden group">
-             {/* Placeholder for Product Image */}
+        <div className="product-card w-screen flex flex-col md:flex-row items-center justify-center px-10 md:px-32 h-full gap-10">
+          <div className="w-full md:w-1/2 h-[50vh] md:h-[80%] glass-panel rounded-t-full relative overflow-hidden group shadow-2xl border-white/40">
+             <Image
+               src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=1000&auto=format&fit=crop"
+               alt="Midnight Orchid Serum"
+               fill
+               className="object-cover scale-110 group-hover:scale-100 transition-transform duration-1000 opacity-90"
+               sizes="(max-width: 768px) 100vw, 50vw"
+             />
              <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-700"></div>
-             <div className="w-full h-full flex items-center justify-center">
-               <span className="font-serif text-3xl opacity-50">L&apos;Orchid Serum</span>
-             </div>
           </div>
-          <div className="w-1/2 flex flex-col gap-6">
+          <div className="w-full md:w-1/2 flex flex-col gap-6">
             <span className="text-sm uppercase tracking-widest text-gray-500">01 / The Elixir</span>
             <h3 className="font-serif text-5xl">Midnight Orchid</h3>
             <p className="font-sans font-light text-gray-600 max-w-md">
@@ -97,14 +101,18 @@ export default function SignatureCollection() {
         </div>
 
         {/* Product 2 */}
-        <div className="product-card w-screen flex items-center justify-center px-10 md:px-32 h-full gap-10">
-          <div className="w-1/2 h-[80%] glass-panel rounded-b-full relative overflow-hidden group">
+        <div className="product-card w-screen flex flex-col md:flex-row items-center justify-center px-10 md:px-32 h-full gap-10">
+          <div className="w-full md:w-1/2 h-[50vh] md:h-[80%] glass-panel rounded-b-full relative overflow-hidden group shadow-2xl border-white/40">
+             <Image
+               src="https://images.unsplash.com/photo-1615397323214-cb962ea53787?q=80&w=1000&auto=format&fit=crop"
+               alt="Provencal Mist"
+               fill
+               className="object-cover scale-110 group-hover:scale-100 transition-transform duration-1000 opacity-90"
+               sizes="(max-width: 768px) 100vw, 50vw"
+             />
              <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-700"></div>
-             <div className="w-full h-full flex items-center justify-center">
-               <span className="font-serif text-3xl opacity-50">Lavender Mist</span>
-             </div>
           </div>
-          <div className="w-1/2 flex flex-col gap-6">
+          <div className="w-full md:w-1/2 flex flex-col gap-6">
             <span className="text-sm uppercase tracking-widest text-gray-500">02 / The Essence</span>
             <h3 className="font-serif text-5xl">Provencal Mist</h3>
             <p className="font-sans font-light text-gray-600 max-w-md">
@@ -114,14 +122,18 @@ export default function SignatureCollection() {
         </div>
 
         {/* Product 3 */}
-        <div className="product-card w-screen flex items-center justify-center px-10 md:px-32 h-full gap-10">
-          <div className="w-1/2 h-[80%] glass-panel rounded-[100px] relative overflow-hidden group">
+        <div className="product-card w-screen flex flex-col md:flex-row items-center justify-center px-10 md:px-32 h-full gap-10">
+          <div className="w-full md:w-1/2 h-[50vh] md:h-[80%] glass-panel rounded-[100px] relative overflow-hidden group shadow-2xl border-white/40">
+             <Image
+               src="https://images.unsplash.com/photo-1596755389378-c31d21fd1273?q=80&w=1000&auto=format&fit=crop"
+               alt="Crushed Pearl Cream"
+               fill
+               className="object-cover scale-110 group-hover:scale-100 transition-transform duration-1000 opacity-90"
+               sizes="(max-width: 768px) 100vw, 50vw"
+             />
              <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-700"></div>
-             <div className="w-full h-full flex items-center justify-center">
-               <span className="font-serif text-3xl opacity-50">Pearl Cream</span>
-             </div>
           </div>
-          <div className="w-1/2 flex flex-col gap-6">
+          <div className="w-full md:w-1/2 flex flex-col gap-6">
             <span className="text-sm uppercase tracking-widest text-gray-500">03 / The Seal</span>
             <h3 className="font-serif text-5xl">Crushed Pearl</h3>
             <p className="font-sans font-light text-gray-600 max-w-md">

@@ -3,6 +3,7 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -99,8 +100,20 @@ export default function OpeningHero() {
 
   return (
     <section ref={container} className="relative w-full h-screen overflow-hidden flex items-center justify-center bg-rose-soft">
-      {/* Background Glow */}
-      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,var(--color-rose-primary)_0%,transparent_60%)] opacity-30 mix-blend-multiply" />
+      {/* Background Video */}
+      <div className="absolute inset-0 z-0">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover opacity-60"
+        >
+          <source src="https://cdn.pixabay.com/video/2023/10/22/186115-877200547_large.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--color-rose-primary)_0%,transparent_80%)] opacity-40 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-white/20 backdrop-blur-[2px]" />
+      </div>
       
       {/* Particles */}
       <div ref={particlesRef} className="absolute inset-0 z-10 pointer-events-none">
@@ -118,12 +131,20 @@ export default function OpeningHero() {
       </div>
 
       <div className="relative z-20 container mx-auto px-4 flex flex-col items-center justify-center h-full">
-        <div ref={bottleRef} className="relative w-64 h-96 md:w-80 md:h-[30rem] mb-8 will-change-transform">
-          {/* Using a placeholder for now, replace with actual luxury product image */}
-          <div className="absolute inset-0 rounded-full bg-white/20 backdrop-blur-md border border-white/40 shadow-2xl overflow-hidden flex items-center justify-center glass-panel">
-            <span className="font-serif text-2xl text-black/50">L&apos;AURA</span>
+        <div ref={bottleRef} className="relative w-64 h-96 md:w-80 md:h-[30rem] mb-8 will-change-transform group">
+          <div className="absolute inset-0 rounded-t-full rounded-b-[40%] bg-white/10 backdrop-blur-md border border-white/30 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] overflow-hidden transition-all duration-700 group-hover:shadow-[0_40px_80px_-10px_rgba(0,0,0,0.4)] group-hover:bg-white/20">
+            <Image
+              src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=1000&auto=format&fit=crop"
+              alt="Aura Luxury Serum"
+              fill
+              className="object-cover opacity-90 mix-blend-overlay scale-110 group-hover:scale-100 transition-transform duration-1000"
+              priority
+              sizes="(max-width: 768px) 16rem, 20rem"
+            />
+            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-white/40 to-transparent">
+              <span className="font-serif text-3xl text-black/70 tracking-widest uppercase">Aura</span>
+            </div>
           </div>
-          {/* <Image src="/images/hero-bottle.png" alt="Aura Luxury Serum" fill className="object-contain drop-shadow-2xl" priority /> */}
         </div>
 
         <div ref={textRef} className="text-center z-30">
