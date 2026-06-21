@@ -81,7 +81,7 @@ export default function SignatureCollection() {
       <div ref={productsRef} className="flex w-[300vw] h-[60vh] items-center relative z-20 mt-20">
         {/* Product 1 */}
         <div className="product-card w-screen flex flex-col md:flex-row items-center justify-center px-10 md:px-32 h-full gap-10">
-          <div className="w-full md:w-1/2 h-[50vh] md:h-[80%] glass-panel rounded-t-full relative overflow-hidden group shadow-2xl border-white/40">
+          <div className="w-full md:w-1/2 h-[50vh] md:h-[80%] glass-panel rounded-t-full rounded-b-[40%] relative overflow-hidden group shadow-2xl border-white/40">
             <Image
               src="/images/aura-serum.jpg"
               alt="Midnight Orchid Serum"
@@ -102,14 +102,14 @@ export default function SignatureCollection() {
 
         {/* Product 2 */}
         <div className="product-card w-screen flex flex-col md:flex-row items-center justify-center px-10 md:px-32 h-full gap-10">
-          <div className="w-full md:w-1/2 h-[50vh] md:h-[80%] glass-panel rounded-b-full relative overflow-hidden group shadow-2xl border-white/40">
-            {/* <Image
-              src=""
+          <div className="w-full md:w-1/2 h-[50vh] md:h-[80%] glass-panel rounded-t-full rounded-b-[40%] relative overflow-hidden group shadow-2xl border-white/40">
+            <Image
+              src="/images/provencal-mist.png"
               alt="Provencal Mist"
               fill
               className="object-cover scale-110 group-hover:scale-100 transition-transform duration-1000 opacity-90"
               sizes="(max-width: 768px) 100vw, 50vw"
-            /> */}
+            />
             <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-700"></div>
           </div>
           <div className="w-full md:w-1/2 flex flex-col gap-6">
@@ -123,7 +123,7 @@ export default function SignatureCollection() {
 
         {/* Product 3 */}
         <div className="product-card w-screen flex flex-col md:flex-row items-center justify-center px-10 md:px-32 h-full gap-10">
-          <div className="w-full md:w-1/2 h-[50vh] md:h-[80%] glass-panel rounded-[100px] relative overflow-hidden group shadow-2xl border-white/40">
+          <div className="w-full md:w-1/2 h-[50vh] md:h-[80%] glass-panel rounded-t-full rounded-b-[40%] relative overflow-hidden group shadow-2xl border-white/40">
             <Image
               src="/images/aura-mist.jpg"
               alt="Crushed Pearl Cream"

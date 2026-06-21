@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useLoadingStore } from "@/lib/store";
+import Image from "next/image";
 import { useProgress } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
@@ -147,6 +148,12 @@ function LiquidDroplet() {
     if (meshRef.current) {
       meshRef.current.rotation.y = state.clock.elapsedTime * 0.2;
       meshRef.current.rotation.x = state.clock.elapsedTime * 0.1;
+      
+      // Smoothly interpolate position towards normalized mouse position
+      const targetX = state.pointer.x * 1.5;
+      const targetY = state.pointer.y * 1.0;
+      meshRef.current.position.x += (targetX - meshRef.current.position.x) * 0.05;
+      meshRef.current.position.y += (targetY - meshRef.current.position.y) * 0.05;
     }
   });
 
@@ -171,6 +178,19 @@ function LiquidDroplet() {
 export default function PremiumLoader() {
   const [showButton, setShowButton] = useState(false);
   const [internalProgress, setInternalProgress] = useState(0);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const x = (e.clientX - window.innerWidth / 2) / 15;
+      const y = (e.clientY - window.innerHeight / 2) / 15;
+      setMousePos({ x, y });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
   const { isLoaded, setIsLoaded, setHasInteracted } = useLoadingStore();
   const { progress } = useProgress();
 
@@ -231,6 +251,36 @@ export default function PremiumLoader() {
           </div>
 
           <div className="relative z-20 flex flex-col items-center justify-center w-full h-full p-8">
+            {/* Floating outer container + interactive inner container */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1, y: [0, -15, 0] }}
+              transition={{ 
+                opacity: { duration: 1, delay: 0.3 },
+                scale: { duration: 1, delay: 0.3 },
+                y: { repeat: Infinity, duration: 4, ease: "easeInOut" }
+              }}
+              className="z-30 mb-8 animate-in fade-in zoom-in-95 duration-1000"
+            >
+              <motion.div
+                animate={{ 
+                  x: mousePos.x, 
+                  y: mousePos.y,
+                  rotate: mousePos.x * 0.4
+                }}
+                transition={{ type: "spring", damping: 30, stiffness: 150 }}
+                className="relative w-40 h-60 md:w-48 md:h-72 mix-blend-multiply pointer-events-none"
+              >
+                <Image
+                  src="/images/aura-serum.jpg"
+                  alt="Aura Product Preview"
+                  fill
+                  className="object-cover opacity-90 scale-105"
+                  priority
+                />
+              </motion.div>
+            </motion.div>
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
