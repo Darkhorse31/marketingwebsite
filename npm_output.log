@@ -1,0 +1,16 @@
+
+> luxury-beauty-exhibition@0.1.0 dev
+> next dev
+
+  ▲ Next.js 15.0.0
+  - Local:        http://localhost:3000
+
+ ✓ Starting...
+ ✓ Ready in 2.9s
+ ○ Compiling / ...
+ ✓ Compiled / in 17.2s (1835 modules)
+ GET / 200 in 18595ms
+ GET / 200 in 65ms
+ ✓ Compiled in 915ms (1817 modules)
+ ✓ Compiled in 467ms (1817 modules)
+ ✓ Compiled in 412ms (1817 modules)

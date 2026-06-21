@@ -107,7 +107,9 @@ export default function DropletController() {
 
     // Apply force to velocity, apply damping
     velocity.current.add(force.multiplyScalar(delta));
-    velocity.current.multiplyScalar(damping);
+    // adjust damping based on frame rate (assuming 60fps baseline where delta is ~0.016)
+    const timeAdjustedDamping = Math.pow(damping, delta * 60);
+    velocity.current.multiplyScalar(timeAdjustedDamping);
 
     // Apply velocity to position
     currentPos.current.add(velocity.current);
@@ -117,8 +119,35 @@ export default function DropletController() {
 
     // Apply squash and stretch based on velocity
     const speed = velocity.current.length();
-    // Move scale stretching to the inner Droplet component if needed,
-    // or apply uniform scaling here
+
+    if (speed > 0.005) {
+      // Align droplet with velocity vector
+      const dir = velocity.current.clone().normalize();
+
+      // In Droplet.tsx, the teardrop tip points to +Y.
+      // We want the rounded bottom (-Y) to point towards the velocity direction,
+      // so the teardrop tip (+Y) trails behind.
+      // Therefore, we align +Y with `-dir`.
+      const up = new THREE.Vector3(0, 1, 0);
+      const targetDir = dir.clone().negate();
+
+      const targetQuat = new THREE.Quaternion().setFromUnitVectors(up, targetDir);
+      groupRef.current.quaternion.slerp(targetQuat, 0.15);
+
+      // Squash and stretch
+      // Stretch along Y (which is now trailing), squash along X and Z
+      const stretch = 1 + speed * 10.0;
+      const squash = 1 - speed * 4.0;
+
+      const clampedStretch = Math.min(stretch, 1.3);
+      const clampedSquash = Math.max(squash, 0.75);
+
+      groupRef.current.scale.lerp(new THREE.Vector3(clampedSquash, clampedStretch, clampedSquash), 0.1);
+    } else {
+      // Idle: slowly return to upright position and normal scale
+      groupRef.current.scale.lerp(new THREE.Vector3(1, 1, 1), 0.05);
+      groupRef.current.quaternion.slerp(new THREE.Quaternion(), 0.05);
+    }
   });
 
   return (

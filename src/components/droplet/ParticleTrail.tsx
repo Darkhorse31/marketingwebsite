@@ -37,7 +37,7 @@ export default function ParticleTrail({ parentVelocity }: { parentVelocity: Reac
     }
   }, [ingredientTheme]);
 
-  let particleIndex = 0;
+  const particleIndex = useRef(0);
 
   useFrame((state, delta) => {
     if (!meshRef.current) return;
@@ -50,7 +50,7 @@ export default function ParticleTrail({ parentVelocity }: { parentVelocity: Reac
       // Emit rate based on speed
       const emitCount = Math.floor(speed * 10);
       for (let i = 0; i < emitCount; i++) {
-        const p = particles[particleIndex];
+        const p = particles[particleIndex.current];
         // Start at current droplet position (relative to group, which is 0,0,0)
         p.position.set(
           (Math.random() - 0.5) * 0.2,
@@ -67,7 +67,7 @@ export default function ParticleTrail({ parentVelocity }: { parentVelocity: Reac
         );
         p.life = p.maxLife;
 
-        particleIndex = (particleIndex + 1) % PARTICLE_COUNT;
+        particleIndex.current = (particleIndex.current + 1) % PARTICLE_COUNT;
       }
     }
 

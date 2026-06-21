@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useDropletStore, DeviceQuality } from "@/store/useDropletStore";
 import DropletController from "./DropletController";
 import { Environment, AdaptiveDpr, AdaptiveEvents } from "@react-three/drei";
-import { EffectComposer, Bloom, DepthOfField } from "@react-three/postprocessing";
+import { EffectComposer, DepthOfField } from "@react-three/postprocessing";
 
 export default function DropletCanvas() {
   const setQuality = useDropletStore((state) => state.setQuality);
@@ -44,40 +44,24 @@ export default function DropletCanvas() {
         <AdaptiveDpr pixelated={quality === 'mobile'} />
         <AdaptiveEvents />
 
-        {/* Lights */}
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[5, 5, 5]} intensity={1} castShadow={quality === 'desktop'} />
-        <directionalLight position={[-5, -5, -5]} intensity={0.5} />
+        {/* Crisp Water Lighting */}
+        <ambientLight intensity={0.8} color="#ffffff" />
+        {/* Main highlight light (simulating sun/key light for a sharp specular hit) */}
+        <directionalLight position={[10, 10, 5]} intensity={2.5} color="#ffffff" />
+        {/* Soft fill light */}
+        <directionalLight position={[-5, -5, -5]} intensity={0.5} color="#e0f2fe" />
 
-        <Environment preset="studio" />
+        {/* Clean environment for realistic reflections, avoiding heavy studio contrast */}
+        <Environment preset="city" environmentIntensity={0.5} />
 
         {/* The actual droplet and its animation controller */}
         <DropletController />
 
-        {/* Post-processing (Disable on mobile) */}
-        {quality !== 'mobile' && (
-          quality === 'desktop' ? (
+        {/* Post-processing (Disable on mobile) - Bloom removed to prevent glowing bulb effect */}
+        {quality === 'desktop' && (
             <EffectComposer>
-              <Bloom
-                luminanceThreshold={0.5}
-                luminanceSmoothing={0.9}
-                intensity={1.5}
-                levels={8}
-                mipmapBlur
-              />
-              <DepthOfField focusDistance={0} focalLength={0.02} bokehScale={2} height={480} />
+              <DepthOfField focusDistance={0} focalLength={0.02} bokehScale={1.5} height={480} />
             </EffectComposer>
-          ) : (
-            <EffectComposer>
-              <Bloom
-                luminanceThreshold={0.5}
-                luminanceSmoothing={0.9}
-                intensity={0.5}
-                levels={8}
-                mipmapBlur
-              />
-            </EffectComposer>
-          )
         )}
       </Canvas>
     </div>
