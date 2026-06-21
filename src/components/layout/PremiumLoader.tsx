@@ -217,7 +217,7 @@ export default function PremiumLoader() {
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: 1.5, ease: "easeInOut" } }}
-          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-rose-soft overflow-hidden"
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-rose-soft overflow-hidden pointer-events-auto"
         >
           {/* Background Ambient Glow */}
           <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,var(--color-rose-primary)_0%,transparent_50%)] opacity-20 mix-blend-multiply" />
@@ -250,19 +250,16 @@ export default function PremiumLoader() {
                 />
               </div>
 
-              <div className="text-xs font-sans tracking-[0.2em] text-black/40 h-6">
+              <div className="text-xs font-sans tracking-[0.2em] text-black/40 h-6 z-50 relative">
                 {!showButton ? (
                   <span>LOADING {Math.floor(internalProgress)}%</span>
                 ) : (
-                  <motion.button
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
+                  <button
                     onClick={handleEnter}
-                    className="hover:text-black transition-colors duration-300 pointer-events-auto cursor-pointer pb-1 border-b border-transparent hover:border-black/30"
+                    className="hover:text-black transition-colors duration-300 cursor-pointer pb-1 border-b border-transparent hover:border-black/30 relative z-50 pointer-events-auto block animate-in fade-in slide-in-from-bottom-2"
                   >
                     ENTER EXPERIENCE
-                  </motion.button>
+                  </button>
                 )}
               </div>
             </div>
