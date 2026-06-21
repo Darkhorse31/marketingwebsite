@@ -109,7 +109,7 @@ export default function OpeningHero() {
           playsInline
           className="w-full h-full object-cover opacity-60"
         >
-          <source src="https://cdn.pixabay.com/video/2023/10/22/186115-877200547_large.mp4" type="video/mp4" />
+          <source src="https://player.vimeo.com/external/344790734.sd.mp4?s=84ce63c0f25394c11cb36fe3591d91a015af60bc&profile_id=139&oauth2_token_id=1223210874" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--color-rose-primary)_0%,transparent_80%)] opacity-40 mix-blend-multiply" />
         <div className="absolute inset-0 bg-white/20 backdrop-blur-[2px]" />
