@@ -3,6 +3,7 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -43,8 +44,13 @@ export default function FinalCollection() {
     <section ref={container} className="relative w-full h-screen bg-black flex items-center justify-center overflow-hidden">
       
       <div ref={videoRef} className="relative w-[60%] h-[60vh] rounded-[40px] overflow-hidden will-change-transform z-0">
-         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1616082408435-081cb9fce0fa?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center brightness-50"></div>
-         {/* Could be replaced with a looping cinematic video */}
+         <Image
+           src="/images/complete-collection.png"
+           alt="The Complete Aura Collection"
+           fill
+           className="object-cover brightness-50"
+           sizes="100vw"
+         />
       </div>
 
       <div ref={textRef} className="absolute z-10 text-center text-white opacity-0 translate-y-10 pointer-events-none">

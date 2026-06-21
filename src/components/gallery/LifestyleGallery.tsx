@@ -3,8 +3,21 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const IMAGES = [
+  "/images/lifestyle-1.jpg",
+  "/images/lifestyle-2.jpg",
+  "/images/cellular-gold.png",
+  "/images/botanical-heritage.png",
+  "/images/lifestyle-3.jpg",
+  "/images/lifestyle-4.jpg",
+  "/images/lifestyle-5.jpg",
+  "/images/botanical-heritage.png",
+  "/images/aura-mist.jpg"
+];
 
 export default function LifestyleGallery() {
   const container = useRef<HTMLDivElement>(null);
@@ -68,10 +81,11 @@ export default function LifestyleGallery() {
         
         {/* Column 1 - Downward motion */}
         <div className="gallery-col flex flex-col gap-4 md:gap-8 w-1/3 mt-[-10%]">
-          {[1, 2, 3].map((item) => (
-            <div key={`col1-${item}`} className="relative w-full aspect-[3/4] bg-white/40 backdrop-blur-sm overflow-hidden group rounded-lg">
-              <div className="absolute inset-0 bg-black/5 group-hover:scale-105 transition-transform duration-700 flex items-center justify-center">
-                 <span className="font-serif text-xl opacity-30">Spa Retreat</span>
+          {[0, 1, 2].map((i) => (
+            <div key={`col1-${i}`} className="relative w-full aspect-[3/4] bg-white/40 backdrop-blur-sm overflow-hidden group rounded-lg">
+              <div className="absolute inset-0 group-hover:scale-105 transition-transform duration-700">
+                 <Image src={IMAGES[i]} alt={`Lifestyle gallery ${i}`} fill className="object-cover opacity-90" sizes="(max-width: 768px) 30vw, 25vw" />
+                 <div className="absolute inset-0 bg-black/5 hover:bg-transparent transition-colors duration-500"></div>
               </div>
             </div>
           ))}
@@ -79,10 +93,11 @@ export default function LifestyleGallery() {
 
         {/* Column 2 - Upward motion */}
         <div className="gallery-col flex flex-col gap-4 md:gap-8 w-1/3 mt-[10%]">
-          {[4, 5, 6].map((item) => (
-            <div key={`col2-${item}`} className="relative w-full aspect-[4/5] bg-white/60 backdrop-blur-sm overflow-hidden group rounded-lg">
-              <div className="absolute inset-0 bg-black/5 group-hover:scale-105 transition-transform duration-700 flex items-center justify-center">
-                 <span className="font-serif text-xl opacity-30">Natural Stone</span>
+          {[3, 4, 5].map((i) => (
+            <div key={`col2-${i}`} className="relative w-full aspect-[4/5] bg-white/60 backdrop-blur-sm overflow-hidden group rounded-lg">
+              <div className="absolute inset-0 group-hover:scale-105 transition-transform duration-700">
+                 <Image src={IMAGES[i]} alt={`Lifestyle gallery ${i}`} fill className="object-cover opacity-90" sizes="(max-width: 768px) 30vw, 25vw" />
+                 <div className="absolute inset-0 bg-black/5 hover:bg-transparent transition-colors duration-500"></div>
               </div>
             </div>
           ))}
@@ -90,10 +105,11 @@ export default function LifestyleGallery() {
 
         {/* Column 3 - Downward motion */}
         <div className="gallery-col flex flex-col gap-4 md:gap-8 w-1/3 mt-[-5%]">
-          {[7, 8, 9].map((item) => (
-            <div key={`col3-${item}`} className="relative w-full aspect-square bg-white/50 backdrop-blur-sm overflow-hidden group rounded-lg">
-              <div className="absolute inset-0 bg-black/5 group-hover:scale-105 transition-transform duration-700 flex items-center justify-center">
-                 <span className="font-serif text-xl opacity-30">Candlelight</span>
+          {[6, 7, 8].map((i) => (
+            <div key={`col3-${i}`} className="relative w-full aspect-square bg-white/50 backdrop-blur-sm overflow-hidden group rounded-lg">
+              <div className="absolute inset-0 group-hover:scale-105 transition-transform duration-700">
+                 <Image src={IMAGES[i]} alt={`Lifestyle gallery ${i}`} fill className="object-cover opacity-90" sizes="(max-width: 768px) 30vw, 25vw" />
+                 <div className="absolute inset-0 bg-black/5 hover:bg-transparent transition-colors duration-500"></div>
               </div>
             </div>
           ))}

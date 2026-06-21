@@ -3,6 +3,7 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -72,8 +73,14 @@ export default function BrandPhilosophy() {
     <section ref={container} className="relative w-full h-screen bg-rose-soft flex items-center overflow-hidden">
       <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
          <div ref={imageRef} className="w-[120%] h-[120%] -left-[10%] -top-[10%] absolute">
-            {/* Abstract background for philosophy, replacing with a soft gradient for now */}
-            <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-rose-primary/20 backdrop-blur-3xl mix-blend-overlay"></div>
+            <Image
+              src="/images/aura-mist.jpg"
+              alt="Silk flowing underwater"
+              fill
+              className="object-cover opacity-30 mix-blend-multiply"
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-br from-white/60 to-rose-primary/30 backdrop-blur-3xl mix-blend-overlay"></div>
          </div>
       </div>
       

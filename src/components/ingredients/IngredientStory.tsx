@@ -3,6 +3,7 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -85,35 +86,56 @@ export default function IngredientStory() {
       <div ref={rightCol} className="w-full md:w-1/2 flex flex-col gap-32 pt-[50vh] px-10 md:px-20 relative z-20">
         
         {/* Ingredient 1 */}
-        <div className="relative w-full aspect-[3/4] glass-panel overflow-hidden group">
-          <div className="absolute inset-0 ingredient-img scale-[1.2] flex items-center justify-center bg-black/5">
-             <span className="font-serif text-2xl opacity-40">24k Gold Flakes</span>
+        <div className="relative w-full aspect-[3/4] rounded-2xl glass-panel overflow-hidden group border-white/40">
+          <div className="absolute inset-0 ingredient-img scale-110 group-hover:scale-100 transition-transform duration-1000">
+             <Image
+               src="/images/cellular-gold.png"
+               alt="Cellular Gold"
+               fill
+               className="object-cover"
+               sizes="(max-width: 768px) 100vw, 50vw"
+             />
+             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-80" />
           </div>
-          <div className="absolute bottom-10 left-10 text-black">
+          <div className="absolute bottom-10 left-10 text-white z-10 drop-shadow-md">
              <h4 className="font-serif text-3xl mb-2">Cellular Gold</h4>
-             <p className="font-sans text-sm font-light uppercase tracking-widest opacity-70">Anti-inflammatory</p>
+             <p className="font-sans text-sm font-light uppercase tracking-widest opacity-90">Anti-inflammatory</p>
           </div>
         </div>
 
         {/* Ingredient 2 */}
-        <div className="relative w-full aspect-square glass-panel overflow-hidden group ml-auto md:w-4/5">
-          <div className="absolute inset-0 ingredient-img scale-[1.2] flex items-center justify-center bg-black/5">
-             <span className="font-serif text-2xl opacity-40">Aloe Vera Heart</span>
+        <div className="relative w-full aspect-square rounded-2xl glass-panel overflow-hidden group ml-auto md:w-4/5 border-white/40">
+          <div className="absolute inset-0 ingredient-img scale-110 group-hover:scale-100 transition-transform duration-1000">
+             <Image
+               src="/images/aura-serum.jpg"
+               alt="Desert Aloe"
+               fill
+               className="object-cover"
+               sizes="(max-width: 768px) 100vw, 40vw"
+             />
+             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-80" />
           </div>
-          <div className="absolute bottom-10 left-10 text-black">
+          <div className="absolute bottom-10 left-10 text-white z-10 drop-shadow-md">
              <h4 className="font-serif text-3xl mb-2">Desert Aloe</h4>
-             <p className="font-sans text-sm font-light uppercase tracking-widest opacity-70">Deep Hydration</p>
+             <p className="font-sans text-sm font-light uppercase tracking-widest opacity-90">Deep Hydration</p>
           </div>
         </div>
 
         {/* Ingredient 3 */}
-        <div className="relative w-full aspect-[4/3] glass-panel overflow-hidden group">
-          <div className="absolute inset-0 ingredient-img scale-[1.2] flex items-center justify-center bg-black/5">
-             <span className="font-serif text-2xl opacity-40">Wild Honey</span>
+        <div className="relative w-full aspect-[4/3] rounded-2xl glass-panel overflow-hidden group border-white/40">
+          <div className="absolute inset-0 ingredient-img scale-110 group-hover:scale-100 transition-transform duration-1000">
+             <Image
+               src="/images/aura-mist.jpg"
+               alt="Manuka Nectar"
+               fill
+               className="object-cover"
+               sizes="(max-width: 768px) 100vw, 50vw"
+             />
+             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-80" />
           </div>
-          <div className="absolute bottom-10 left-10 text-black">
+          <div className="absolute bottom-10 left-10 text-white z-10 drop-shadow-md">
              <h4 className="font-serif text-3xl mb-2">Manuka Nectar</h4>
-             <p className="font-sans text-sm font-light uppercase tracking-widest opacity-70">Cell Repair</p>
+             <p className="font-sans text-sm font-light uppercase tracking-widest opacity-90">Cell Repair</p>
           </div>
         </div>
 

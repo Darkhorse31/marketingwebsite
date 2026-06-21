@@ -3,6 +3,7 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -76,10 +77,17 @@ export default function LuxuryPackaging() {
       {/* Masked Background Image representing packaging textures */}
       <div 
         ref={maskRef} 
-        className="absolute inset-0 z-0 bg-[url('https://images.unsplash.com/photo-1626296766023-b1d7d206f0b4?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center"
+        className="absolute inset-0 z-0"
         style={{ clipPath: "circle(0% at 50% 50%)" }}
       >
-         <div className="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+        <Image
+          src="/images/packaging.png"
+          alt="Sculpted Glass Packaging"
+          fill
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px]"></div>
       </div>
 
       <div ref={textRef} className="relative z-10 text-center px-4 max-w-3xl mix-blend-difference text-white">
