@@ -89,7 +89,7 @@ export default function IngredientStory() {
         <div className="relative w-full aspect-[3/4] rounded-2xl glass-panel overflow-hidden group border-white/40">
           <div className="absolute inset-0 ingredient-img scale-110 group-hover:scale-100 transition-transform duration-1000">
              <Image
-               src="https://images.unsplash.com/photo-1596245037286-4f47bc3adab2?q=80&w=1000&auto=format&fit=crop"
+               src="https://images.unsplash.com/photo-1616394584738-fc6e612e71c9?q=80&w=1000&auto=format&fit=crop"
                alt="Cellular Gold"
                fill
                className="object-cover"

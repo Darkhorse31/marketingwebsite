@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 const IMAGES = [
   "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=800&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1596245037286-4f47bc3adab2?q=80&w=800&auto=format&fit=crop"
+  "https://images.unsplash.com/photo-1616394584738-fc6e612e71c9?q=80&w=800&auto=format&fit=crop"
 ];
 
 export default function FeaturedProducts() {
