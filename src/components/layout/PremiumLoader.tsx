@@ -118,7 +118,7 @@ const dropletFragmentShader = `
     fresnel = pow(fresnel, 3.0);
 
     // Add a soft iridescence or caustics effect
-    vec3 iridescentColor = vec3(0.98, 0.9, 0.95); // soft rose/pearl
+    vec3 iridescentColor = vec3(1.0, 0.94, 0.65); // glowing gold/amber
 
     // Base liquid color mixing
     vec3 finalColor = mix(uColor, iridescentColor, fresnel * 0.8);
@@ -240,7 +240,7 @@ export default function PremiumLoader() {
           className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-rose-soft overflow-hidden pointer-events-auto"
         >
           {/* Background Ambient Glow */}
-          <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,var(--color-rose-primary)_0%,transparent_50%)] opacity-20 mix-blend-multiply" />
+          <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,var(--color-luxury-gold)_0%,transparent_50%)] opacity-20 mix-blend-multiply" />
 
           {/* WebGL Canvas */}
           <div className="absolute inset-0 z-10 pointer-events-none">
@@ -251,35 +251,6 @@ export default function PremiumLoader() {
           </div>
 
           <div className="relative z-20 flex flex-col items-center justify-center w-full h-full p-8">
-            {/* Floating outer container + interactive inner container */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1, y: [0, -15, 0] }}
-              transition={{ 
-                opacity: { duration: 1, delay: 0.3 },
-                scale: { duration: 1, delay: 0.3 },
-                y: { repeat: Infinity, duration: 4, ease: "easeInOut" }
-              }}
-              className="z-30 mb-8 animate-in fade-in zoom-in-95 duration-1000"
-            >
-              <motion.div
-                animate={{ 
-                  x: mousePos.x, 
-                  y: mousePos.y,
-                  rotate: mousePos.x * 0.4
-                }}
-                transition={{ type: "spring", damping: 30, stiffness: 150 }}
-                className="relative w-40 h-60 md:w-48 md:h-72 mix-blend-multiply pointer-events-none"
-              >
-                <Image
-                  src="/images/aura-serum.jpg"
-                  alt="Aura Product Preview"
-                  fill
-                  className="object-cover opacity-90 scale-105"
-                  priority
-                />
-              </motion.div>
-            </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -287,26 +258,26 @@ export default function PremiumLoader() {
               transition={{ duration: 1, delay: 0.5 }}
               className="text-center mb-12"
             >
-              <h1 className="font-serif text-3xl md:text-5xl tracking-widest text-black/80 uppercase">Aura</h1>
+              <h1 className="font-serif text-3xl md:text-5xl tracking-[0.3em] text-black/85 uppercase">Aura</h1>
             </motion.div>
 
             <div className="absolute bottom-20 flex flex-col items-center">
-              <div className="w-48 h-[1px] bg-black/10 overflow-hidden mb-4 relative">
+              <div className="w-48 h-[1px] bg-black/5 overflow-hidden mb-4 relative">
                 <motion.div
-                  className="h-full bg-black/50"
+                  className="h-full bg-[#d4af37]"
                   initial={{ width: 0 }}
                     animate={{ width: `${internalProgress}%` }}
                   transition={{ ease: "linear" }}
                 />
               </div>
 
-              <div className="text-xs font-sans tracking-[0.2em] text-black/40 h-6 z-50 relative">
+              <div className="text-xs font-sans tracking-[0.25em] text-black/40 h-6 z-50 relative">
                 {!showButton ? (
                   <span>LOADING {Math.floor(internalProgress)}%</span>
                 ) : (
                   <button
                     onClick={handleEnter}
-                    className="hover:text-black transition-colors duration-300 cursor-pointer pb-1 border-b border-transparent hover:border-black/30 relative z-50 pointer-events-auto block animate-in fade-in slide-in-from-bottom-2"
+                    className="hover:text-black transition-colors duration-300 cursor-pointer pb-1 border-b border-transparent hover:border-black/30 text-black/70 hover:text-black relative z-50 pointer-events-auto block animate-in fade-in slide-in-from-bottom-2"
                   >
                     ENTER EXPERIENCE
                   </button>

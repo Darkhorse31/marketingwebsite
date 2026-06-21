@@ -33,7 +33,7 @@ export default function OpeningHero() {
 
   useLayoutEffect(() => {
     if (!container.current) return;
-    
+
     const ctx = gsap.context(() => {
       // Floating animation for bottle
       gsap.to(bottleRef.current, {
@@ -83,7 +83,7 @@ export default function OpeningHero() {
         ease: "power3.out",
         delay: 0.2
       });
-      
+
       gsap.from(".hero-text-line", {
         y: 50,
         opacity: 0,
@@ -114,7 +114,7 @@ export default function OpeningHero() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--color-rose-primary)_0%,transparent_80%)] opacity-40 mix-blend-multiply" />
         <div className="absolute inset-0 bg-white/20 backdrop-blur-[2px]" />
       </div>
-      
+
       {/* Particles */}
       <div ref={particlesRef} className="absolute inset-0 z-10 pointer-events-none">
         {PARTICLES.map((particle, i) => (
@@ -131,21 +131,7 @@ export default function OpeningHero() {
       </div>
 
       <div className="relative z-20 container mx-auto px-4 flex flex-col items-center justify-center h-full">
-        <div ref={bottleRef} className="relative w-64 h-96 md:w-80 md:h-[30rem] mb-8 will-change-transform group">
-          <div className="absolute inset-0 rounded-t-full rounded-b-[40%] bg-white/10 backdrop-blur-md border border-white/30 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] overflow-hidden transition-all duration-700 group-hover:shadow-[0_40px_80px_-10px_rgba(0,0,0,0.4)] group-hover:bg-white/20">
-            <Image
-              src="/images/aura-serum.jpg"
-              alt="Aura Luxury Serum"
-              fill
-              className="object-cover opacity-90 mix-blend-overlay scale-110 group-hover:scale-100 transition-transform duration-1000"
-              priority
-              sizes="(max-width: 768px) 16rem, 20rem"
-            />
-            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-white/40 to-transparent">
-              <span className="font-serif text-3xl text-black/70 tracking-widest uppercase">Aura</span>
-            </div>
-          </div>
-        </div>
+
 
         <div ref={textRef} className="text-center z-30">
           <h1 className="hero-text-line font-serif text-5xl md:text-8xl tracking-tighter text-gray-900 mb-4">
@@ -156,14 +142,14 @@ export default function OpeningHero() {
           </p>
         </div>
       </div>
-      
+
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center opacity-70">
         <span className="text-xs uppercase tracking-[0.2em] mb-2">Discover</span>
         <div className="w-[1px] h-12 bg-black/30 overflow-hidden relative">
-            <div className="w-full h-full bg-black absolute top-0 left-0 animate-[scroll_2s_ease-in-out_infinite]" style={{ animationFillMode: 'both' }}></div>
+          <div className="w-full h-full bg-black absolute top-0 left-0 animate-[scroll_2s_ease-in-out_infinite]" style={{ animationFillMode: 'both' }}></div>
         </div>
       </div>
-      
+
       <style jsx>{`
         @keyframes scroll {
             0% { transform: translateY(-100%); }
