@@ -134,7 +134,7 @@ export default function OpeningHero() {
         <div ref={bottleRef} className="relative w-64 h-96 md:w-80 md:h-[30rem] mb-8 will-change-transform group">
           <div className="absolute inset-0 rounded-t-full rounded-b-[40%] bg-white/10 backdrop-blur-md border border-white/30 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] overflow-hidden transition-all duration-700 group-hover:shadow-[0_40px_80px_-10px_rgba(0,0,0,0.4)] group-hover:bg-white/20">
             <Image
-              src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=1000&auto=format&fit=crop"
+              src="/images/aura-serum.jpg"
               alt="Aura Luxury Serum"
               fill
               className="object-cover opacity-90 mix-blend-overlay scale-110 group-hover:scale-100 transition-transform duration-1000"

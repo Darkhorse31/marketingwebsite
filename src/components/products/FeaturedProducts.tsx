@@ -8,9 +8,9 @@ import Image from "next/image";
 gsap.registerPlugin(ScrollTrigger);
 
 const IMAGES = [
-  "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1616394584738-fc6e612e71c9?q=80&w=800&auto=format&fit=crop"
+  "/images/aura-serum.jpg",
+  "/images/aura-mist.jpg",
+  "/images/cellular-gold.png"
 ];
 
 export default function FeaturedProducts() {

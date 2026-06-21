@@ -81,7 +81,7 @@ export default function LuxuryPackaging() {
         style={{ clipPath: "circle(0% at 50% 50%)" }}
       >
         <Image
-          src="https://images.unsplash.com/photo-1626296766023-b1d7d206f0b4?q=80&w=2000&auto=format&fit=crop"
+          src="/images/packaging.png"
           alt="Sculpted Glass Packaging"
           fill
           className="object-cover"

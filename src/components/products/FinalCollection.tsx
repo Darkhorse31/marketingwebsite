@@ -45,7 +45,7 @@ export default function FinalCollection() {
       
       <div ref={videoRef} className="relative w-[60%] h-[60vh] rounded-[40px] overflow-hidden will-change-transform z-0">
          <Image
-           src="https://images.unsplash.com/photo-1616082408435-081cb9fce0fa?q=80&w=2000&auto=format&fit=crop"
+           src="/images/complete-collection.png"
            alt="The Complete Aura Collection"
            fill
            className="object-cover brightness-50"

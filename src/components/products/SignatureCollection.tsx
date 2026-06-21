@@ -83,7 +83,7 @@ export default function SignatureCollection() {
         <div className="product-card w-screen flex flex-col md:flex-row items-center justify-center px-10 md:px-32 h-full gap-10">
           <div className="w-full md:w-1/2 h-[50vh] md:h-[80%] glass-panel rounded-t-full relative overflow-hidden group shadow-2xl border-white/40">
             <Image
-              src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=1000&auto=format&fit=crop"
+              src="/images/aura-serum.jpg"
               alt="Midnight Orchid Serum"
               fill
               className="object-cover scale-110 group-hover:scale-100 transition-transform duration-1000 opacity-90"
@@ -125,7 +125,7 @@ export default function SignatureCollection() {
         <div className="product-card w-screen flex flex-col md:flex-row items-center justify-center px-10 md:px-32 h-full gap-10">
           <div className="w-full md:w-1/2 h-[50vh] md:h-[80%] glass-panel rounded-[100px] relative overflow-hidden group shadow-2xl border-white/40">
             <Image
-              src="https://images.unsplash.com/photo-1596755389378-c31d21fd1273?q=80&w=1000&auto=format&fit=crop"
+              src="/images/aura-mist.jpg"
               alt="Crushed Pearl Cream"
               fill
               className="object-cover scale-110 group-hover:scale-100 transition-transform duration-1000 opacity-90"

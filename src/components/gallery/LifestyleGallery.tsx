@@ -8,15 +8,15 @@ import Image from "next/image";
 gsap.registerPlugin(ScrollTrigger);
 
 const IMAGES = [
-  "https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1616394584738-fc6e612e71c9?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1608248593842-8021b191ab6e?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1555820585-c5ae44394b79?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1608248593842-8021b191ab6e?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?q=80&w=800&auto=format&fit=crop"
+  "/images/lifestyle-1.jpg",
+  "/images/lifestyle-2.jpg",
+  "/images/cellular-gold.png",
+  "/images/botanical-heritage.png",
+  "/images/lifestyle-3.jpg",
+  "/images/lifestyle-4.jpg",
+  "/images/lifestyle-5.jpg",
+  "/images/botanical-heritage.png",
+  "/images/aura-mist.jpg"
 ];
 
 export default function LifestyleGallery() {

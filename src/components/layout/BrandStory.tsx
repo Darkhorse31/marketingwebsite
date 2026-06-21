@@ -55,7 +55,7 @@ export default function BrandStory() {
         <div className="relative w-full h-[80vh] overflow-hidden rounded-t-[100px] rounded-bl-[100px]">
           <div ref={imageRef} className="absolute inset-0 w-[110%] h-[110%] -top-[5%] -left-[5%]">
             <Image
-              src="https://images.unsplash.com/photo-1608248593842-8021b191ab6e?q=80&w=2000&auto=format&fit=crop"
+              src="/images/botanical-heritage.png"
               alt="Botanical Mastery Heritage"
               fill
               className="object-cover"

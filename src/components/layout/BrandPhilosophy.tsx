@@ -74,7 +74,7 @@ export default function BrandPhilosophy() {
       <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
          <div ref={imageRef} className="w-[120%] h-[120%] -left-[10%] -top-[10%] absolute">
             <Image
-              src="https://images.unsplash.com/photo-1596755389378-c31d21fd1273?q=80&w=2000&auto=format&fit=crop"
+              src="/images/aura-mist.jpg"
               alt="Silk flowing underwater"
               fill
               className="object-cover opacity-30 mix-blend-multiply"

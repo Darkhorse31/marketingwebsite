@@ -89,7 +89,7 @@ export default function IngredientStory() {
         <div className="relative w-full aspect-[3/4] rounded-2xl glass-panel overflow-hidden group border-white/40">
           <div className="absolute inset-0 ingredient-img scale-110 group-hover:scale-100 transition-transform duration-1000">
              <Image
-               src="https://images.unsplash.com/photo-1616394584738-fc6e612e71c9?q=80&w=1000&auto=format&fit=crop"
+               src="/images/cellular-gold.png"
                alt="Cellular Gold"
                fill
                className="object-cover"
@@ -107,7 +107,7 @@ export default function IngredientStory() {
         <div className="relative w-full aspect-square rounded-2xl glass-panel overflow-hidden group ml-auto md:w-4/5 border-white/40">
           <div className="absolute inset-0 ingredient-img scale-110 group-hover:scale-100 transition-transform duration-1000">
              <Image
-               src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=1000&auto=format&fit=crop"
+               src="/images/aura-serum.jpg"
                alt="Desert Aloe"
                fill
                className="object-cover"
@@ -125,7 +125,7 @@ export default function IngredientStory() {
         <div className="relative w-full aspect-[4/3] rounded-2xl glass-panel overflow-hidden group border-white/40">
           <div className="absolute inset-0 ingredient-img scale-110 group-hover:scale-100 transition-transform duration-1000">
              <Image
-               src="https://images.unsplash.com/photo-1596755389378-c31d21fd1273?q=80&w=1000&auto=format&fit=crop"
+               src="/images/aura-mist.jpg"
                alt="Manuka Nectar"
                fill
                className="object-cover"
