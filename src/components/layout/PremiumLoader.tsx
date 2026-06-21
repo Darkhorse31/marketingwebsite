@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useLoadingStore } from "@/lib/store";
+import Image from "next/image";
 import { useProgress } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
@@ -117,7 +118,7 @@ const dropletFragmentShader = `
     fresnel = pow(fresnel, 3.0);
 
     // Add a soft iridescence or caustics effect
-    vec3 iridescentColor = vec3(0.98, 0.9, 0.95); // soft rose/pearl
+    vec3 iridescentColor = vec3(1.0, 0.94, 0.65); // glowing gold/amber
 
     // Base liquid color mixing
     vec3 finalColor = mix(uColor, iridescentColor, fresnel * 0.8);
@@ -147,6 +148,12 @@ function LiquidDroplet() {
     if (meshRef.current) {
       meshRef.current.rotation.y = state.clock.elapsedTime * 0.2;
       meshRef.current.rotation.x = state.clock.elapsedTime * 0.1;
+      
+      // Smoothly interpolate position towards normalized mouse position
+      const targetX = state.pointer.x * 1.5;
+      const targetY = state.pointer.y * 1.0;
+      meshRef.current.position.x += (targetX - meshRef.current.position.x) * 0.05;
+      meshRef.current.position.y += (targetY - meshRef.current.position.y) * 0.05;
     }
   });
 
@@ -171,6 +178,19 @@ function LiquidDroplet() {
 export default function PremiumLoader() {
   const [showButton, setShowButton] = useState(false);
   const [internalProgress, setInternalProgress] = useState(0);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const x = (e.clientX - window.innerWidth / 2) / 15;
+      const y = (e.clientY - window.innerHeight / 2) / 15;
+      setMousePos({ x, y });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
   const { isLoaded, setIsLoaded, setHasInteracted } = useLoadingStore();
   const { progress } = useProgress();
 
@@ -220,7 +240,7 @@ export default function PremiumLoader() {
           className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-rose-soft overflow-hidden pointer-events-auto"
         >
           {/* Background Ambient Glow */}
-          <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,var(--color-rose-primary)_0%,transparent_50%)] opacity-20 mix-blend-multiply" />
+          <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,var(--color-luxury-gold)_0%,transparent_50%)] opacity-20 mix-blend-multiply" />
 
           {/* WebGL Canvas */}
           <div className="absolute inset-0 z-10 pointer-events-none">
@@ -231,32 +251,33 @@ export default function PremiumLoader() {
           </div>
 
           <div className="relative z-20 flex flex-col items-center justify-center w-full h-full p-8">
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.5 }}
               className="text-center mb-12"
             >
-              <h1 className="font-serif text-3xl md:text-5xl tracking-widest text-black/80 uppercase">Aura</h1>
+              <h1 className="font-serif text-3xl md:text-5xl tracking-[0.3em] text-black/85 uppercase">Aura</h1>
             </motion.div>
 
             <div className="absolute bottom-20 flex flex-col items-center">
-              <div className="w-48 h-[1px] bg-black/10 overflow-hidden mb-4 relative">
+              <div className="w-48 h-[1px] bg-black/5 overflow-hidden mb-4 relative">
                 <motion.div
-                  className="h-full bg-black/50"
+                  className="h-full bg-[#d4af37]"
                   initial={{ width: 0 }}
                     animate={{ width: `${internalProgress}%` }}
                   transition={{ ease: "linear" }}
                 />
               </div>
 
-              <div className="text-xs font-sans tracking-[0.2em] text-black/40 h-6 z-50 relative">
+              <div className="text-xs font-sans tracking-[0.25em] text-black/40 h-6 z-50 relative">
                 {!showButton ? (
                   <span>LOADING {Math.floor(internalProgress)}%</span>
                 ) : (
                   <button
                     onClick={handleEnter}
-                    className="hover:text-black transition-colors duration-300 cursor-pointer pb-1 border-b border-transparent hover:border-black/30 relative z-50 pointer-events-auto block animate-in fade-in slide-in-from-bottom-2"
+                    className="hover:text-black transition-colors duration-300 cursor-pointer pb-1 border-b border-transparent hover:border-black/30 text-black/70 hover:text-black relative z-50 pointer-events-auto block animate-in fade-in slide-in-from-bottom-2"
                   >
                     ENTER EXPERIENCE
                   </button>

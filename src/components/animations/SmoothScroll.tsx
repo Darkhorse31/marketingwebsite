@@ -36,14 +36,6 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     gsap.ticker.add(updateLenis);
     gsap.ticker.lagSmoothing(0);
 
-    // Initial sync with loading store state in case lenis initializes after isLoaded is set
-    if (!isLoaded) {
-      lenis.stop();
-      lenis.scrollTo(0, { immediate: true });
-      document.documentElement.style.overflow = "hidden";
-      document.body.style.overflow = "hidden";
-    }
-
     return () => {
       lenis.destroy();
       gsap.ticker.remove(updateLenis);
